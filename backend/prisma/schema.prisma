@@ -1,0 +1,54 @@
+// MongoDB + Prisma 6.x (Prisma 7 dropped MongoDB support — see .agents/skills/prisma-mongodb-upgrade)
+// learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum CafeSource {
+  PUBLIC_DATA // 수유정보알리미 등 공공데이터로 시드된 항목
+  USER_REPORT // 사용자 제보로 생성된 항목
+  CURATED // 운영자가 직접 답사/큐레이션한 항목
+}
+
+enum ReportStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Cafe {
+  id               String     @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  address          String
+  roadAddress      String?
+  lat              Float
+  lng              Float
+  kakaoPlaceId     String?    @unique // 카카오 키워드 장소 검색 결과와 매칭/중복 방지용
+  hasNursingRoom   Boolean    @default(false)
+  hasDiaperTable   Boolean    @default(false)
+  facilityNote     String? // "카운터 뒤편 별도 공간" 같은 상세 설명
+  source           CafeSource @default(USER_REPORT)
+  verifiedAt       DateTime? // 운영자가 사실 확인한 시각 (없으면 미검증)
+  reports          Report[]
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  @@index([lat, lng])
+}
+
+model Report {
+  id             String       @id @default(auto()) @map("_id") @db.ObjectId
+  cafe           Cafe         @relation(fields: [cafeId], references: [id])
+  cafeId         String       @db.ObjectId
+  hasNursingRoom Boolean?
+  hasDiaperTable Boolean?
+  note           String?
+  status         ReportStatus @default(PENDING)
+  createdAt      DateTime     @default(now())
+}

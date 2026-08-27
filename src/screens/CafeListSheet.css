@@ -1,0 +1,52 @@
+.cafe-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.cafe-sheet-handle {
+  flex: none;
+  padding: 10px 20px 14px;
+  cursor: grab;
+  touch-action: none;
+}
+
+.cafe-sheet-handle-bar {
+  width: 36px;
+  height: 4px;
+  margin: 0 auto 10px;
+  border-radius: 999px;
+  background: #d9d9df;
+}
+
+.cafe-sheet-summary {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.cafe-sheet-list {
+  flex: 1;
+  margin: 0;
+  padding: 0 0 24px;
+  list-style: none;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.cafe-sheet-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+}
