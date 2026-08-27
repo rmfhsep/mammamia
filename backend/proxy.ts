@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// 앱인토스 운영/QR 테스트 도메인 + 로컬 개발 주소만 허용합니다.
+// 앱인토스 운영/QR 테스트 도메인 + 로컬 개발 주소 + 개인 확인용 Vercel 프리뷰만 허용합니다.
 // (CLAUDE.md 참고: 실서비스 https://<appName>.apps.tossmini.com, QR 테스트 https://<appName>.private-apps.tossmini.com)
 const allowedOrigins = [
-  "https://mammamia.apps.tossmini.com",
-  "https://mammamia.private-apps.tossmini.com",
+  "https://mammamiya.apps.tossmini.com",
+  "https://mammamiya.private-apps.tossmini.com",
   "http://localhost:5173",
+  "https://mammamia-web.vercel.app",
 ];
 
 const corsHeaders = {

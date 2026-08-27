@@ -1,10 +1,10 @@
-import { type PointerEvent, useEffect, useRef, useState } from 'react';
-import { Badge, ListRow } from '@toss/tds-mobile';
-import type { Cafe } from '../lib/queries/useCafes';
-import './CafeListSheet.css';
+import { type PointerEvent, useEffect, useRef, useState } from "react";
+import { Badge, ListRow } from "@toss/tds-mobile";
+import type { Cafe } from "../lib/queries/useCafes";
+import "./CafeListSheet.css";
 
 const EXPANDED_RATIO = 0.68; // 뷰포트 높이의 68%까지 펼쳐짐
-const PEEK_HEIGHT = 136; // 접혔을 때 보이는 높이(px) — 핸들 + 요약 한 줄
+const PEEK_HEIGHT = 250; // 접혔을 때 보이는 높이(px) — 핸들 + 요약 한 줄
 
 type Props = {
   cafes: Cafe[];
@@ -16,7 +16,9 @@ export function CafeListSheet({ cafes, loading, onSelect }: Props) {
   const [sheetHeight, setSheetHeight] = useState(0);
   const [translateY, setTranslateY] = useState(0);
   const [dragging, setDragging] = useState(false);
-  const dragStartRef = useRef<{ pointerY: number; translateY: number } | null>(null);
+  const dragStartRef = useRef<{ pointerY: number; translateY: number } | null>(
+    null
+  );
 
   useEffect(() => {
     const updateHeight = () => {
@@ -25,8 +27,8 @@ export function CafeListSheet({ cafes, loading, onSelect }: Props) {
       setTranslateY(height - PEEK_HEIGHT); // 처음엔 접힌 상태(리스트 요약만)로 시작
     };
     updateHeight();
-    window.addEventListener('resize', updateHeight);
-    return () => window.removeEventListener('resize', updateHeight);
+    window.addEventListener("resize", updateHeight);
+    return () => window.removeEventListener("resize", updateHeight);
   }, []);
 
   const peekY = Math.max(sheetHeight - PEEK_HEIGHT, 0);
@@ -40,7 +42,10 @@ export function CafeListSheet({ cafes, loading, onSelect }: Props) {
   function handlePointerMove(e: PointerEvent<HTMLDivElement>) {
     if (!dragStartRef.current) return;
     const delta = e.clientY - dragStartRef.current.pointerY;
-    const next = Math.min(peekY, Math.max(0, dragStartRef.current.translateY + delta));
+    const next = Math.min(
+      peekY,
+      Math.max(0, dragStartRef.current.translateY + delta)
+    );
     setTranslateY(next);
   }
 
@@ -57,7 +62,7 @@ export function CafeListSheet({ cafes, loading, onSelect }: Props) {
       style={{
         height: sheetHeight,
         transform: `translateY(${translateY}px)`,
-        transition: dragging ? 'none' : 'transform 0.25s ease-out',
+        transition: dragging ? "none" : "transform 0.25s ease-out",
       }}
     >
       <div
@@ -69,7 +74,7 @@ export function CafeListSheet({ cafes, loading, onSelect }: Props) {
       >
         <div className="cafe-sheet-handle-bar" />
         <p className="cafe-sheet-summary">
-          {loading ? '주변 카페를 찾는 중...' : `주변 카페 ${cafes.length}곳`}
+          {loading ? "주변 카페를 찾는 중..." : `주변 카페 ${cafes.length}곳`}
         </p>
       </div>
 
@@ -107,5 +112,7 @@ export function CafeListSheet({ cafes, loading, onSelect }: Props) {
 }
 
 function formatDistance(distanceKm: number) {
-  return distanceKm < 1 ? `${Math.round(distanceKm * 1000)}m` : `${distanceKm.toFixed(1)}km`;
+  return distanceKm < 1
+    ? `${Math.round(distanceKm * 1000)}m`
+    : `${distanceKm.toFixed(1)}km`;
 }
