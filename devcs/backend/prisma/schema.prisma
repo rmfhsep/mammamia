@@ -1,0 +1,55 @@
+// MongoDB + Prisma 6.x (Prisma 7 dropped MongoDB support — see .agents/skills/prisma-mongodb-upgrade)
+// learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum QuestionCategory {
+  DATA_STRUCTURE
+  ALGORITHM
+  NETWORK
+  OPERATING_SYSTEM
+  DATABASE
+  WEB
+  ETC
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+model Question {
+  id          String           @id @default(auto()) @map("_id") @db.ObjectId
+  slug        String           @unique // 시드 스크립트 재실행 시 upsert 기준 키
+  category    QuestionCategory
+  difficulty  Difficulty       @default(MEDIUM)
+  question    String
+  options     String[] // 5지선다, 인덱스 0~4
+  answerIndex Int
+  explanation String
+  solves      Solve[]
+  createdAt   DateTime         @default(now())
+
+  @@index([category])
+}
+
+model Solve {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  deviceId      String // 로그인 없이 프론트에서 발급한 익명 기기 식별자 (src/lib/deviceId.ts)
+  question      Question @relation(fields: [questionId], references: [id])
+  questionId    String   @db.ObjectId
+  selectedIndex Int
+  isCorrect     Boolean
+  solvedAt      DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([deviceId, questionId])
+}
