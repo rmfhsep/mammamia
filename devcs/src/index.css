@@ -1,6 +1,26 @@
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
   font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  /* 이 앱은 다크 전용 컨셉이다 (main.tsx의 ColorSchemeArea theme="dark"와 짝을 맞춘 값).
+     TDS가 다루지 않는 커스텀 영역(홈 히어로, 카테고리 카드, 퀴즈 선택지 등)에서만 쓰는 토큰. */
+  --devcs-bg: #0a0b10;
+  --devcs-surface: #15161d;
+  --devcs-surface-raised: #1b1d26;
+  --devcs-border: #26272f;
+  --devcs-text: #f2f3f5;
+  --devcs-text-secondary: #9a9ea6;
+  --devcs-text-tertiary: #6f7480;
+  --devcs-primary: #5b96f8;
+  --devcs-primary-tint: rgba(91, 150, 248, 0.14);
+  --devcs-ring-track: #23252e;
+  --devcs-cta-from: #3f7fed;
+  --devcs-cta-to: #6fa4ff;
+  --devcs-correct: #37d39a;
+  --devcs-correct-tint: rgba(55, 211, 154, 0.14);
+  --devcs-wrong: #f77b84;
+  --devcs-wrong-tint: rgba(247, 123, 132, 0.14);
+  --devcs-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 * {
@@ -14,7 +34,14 @@ body,
   height: 100%;
 }
 
+/* body 배경은 TDS가 주입하는 전역 리셋 CSS에 덮일 수 있어 신뢰할 수 없다(직접 확인함) —
+   각 화면 루트가 스스로 --devcs-bg를 깔고, 여기 #root는 그 사이 최소한의 안전망이다. */
+#root {
+  background: var(--devcs-bg);
+}
+
 body {
+  color: var(--devcs-text);
   overscroll-behavior-y: none;
   -webkit-overflow-scrolling: touch;
 }

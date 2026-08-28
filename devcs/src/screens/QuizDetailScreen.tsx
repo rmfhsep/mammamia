@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Button, FullScreenLoader } from '@toss/tds-mobile';
+import { Button, FullScreenLoader, Result, TopNavigationBackButton } from '@toss/tds-mobile';
 import { getDeviceId } from '../lib/deviceId';
 import { useQuestions } from '../lib/queries/useQuestions';
 import { useSolves, useSubmitSolveMutation } from '../lib/queries/useSolves';
@@ -37,9 +37,7 @@ export function QuizDetailScreen({ questionId, onBack }: Props) {
 
   return (
     <div className="quiz-detail-screen">
-      <button type="button" className="quiz-detail-back" onClick={onBack}>
-        ← 목록으로
-      </button>
+      <TopNavigationBackButton onClick={onBack} aria-label="목록으로" />
 
       <p className="quiz-detail-question">{question.question}</p>
 
@@ -86,15 +84,16 @@ export function QuizDetailScreen({ questionId, onBack }: Props) {
       )}
 
       {result && (
-        <div className="quiz-detail-result">
-          <p className="quiz-detail-result-title">
-            {result.isCorrect ? '정답이에요!' : '아쉬워요, 오답이에요'}
-          </p>
-          <p className="quiz-detail-result-explanation">{result.explanation}</p>
-          <Button color="primary" variant="weak" size="large" display="full" onClick={onBack}>
-            목록으로
-          </Button>
-        </div>
+        <Result
+          figure={<span className="quiz-detail-result-figure">{result.isCorrect ? '🎉' : '💡'}</span>}
+          title={result.isCorrect ? '정답이에요!' : '아쉬워요, 오답이에요'}
+          description={result.explanation}
+          button={
+            <Result.Button color="primary" variant="weak" size="large" display="full" onClick={onBack}>
+              목록으로
+            </Result.Button>
+          }
+        />
       )}
     </div>
   );

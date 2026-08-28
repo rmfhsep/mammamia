@@ -6,8 +6,9 @@
 CS 기초 5지선다 문제를 카드 형태로 풀어보는 앱. 구조와 배포 방식은 [mammamia](../mammamia/CLAUDE.md)를
 그대로 따른다 — 프론트는 앱인토스 콘솔이, 백엔드는 Vercel이 각자 따로 호스팅하고 프론트가 HTTPS로
 백엔드를 호출한다. 서로 다른 도메인이므로 백엔드 쪽에 CORS 처리가 반드시 있어야 한다 (`backend/proxy.ts` 참고).
-DB도 mammamia와 동일하게 **MongoDB + Prisma 6.x**를 쓴다 (Mongo 클러스터는 공유하되 데이터베이스 이름만
-`devcs`로 분리 — `backend/.env.example` 참고).
+DB도 mammamia와 동일하게 **MongoDB + Prisma 6.x**를 쓴다. 다만 클러스터는 mammamia와 **공유하지 않고
+별도 Atlas 클러스터**를 쓴다 (mammamia는 `cluster0.rr7hot1`, devcs는 `cluster0.6k55uj2` — 계정만
+`rmfhsep_db_user`로 같고 클러스터/비밀번호는 다르다. `backend/.env.example` 참고).
 
 > **폴더명(`devcs`)과 미니앱 표시 이름("토스개발자가되")이 다르다.** "토스개발자가되"는 이름에 "토스"가
 > 들어가 상표권/오인 소지로 검수 반려될 수 있다는 리스크가 있다 — 확정 전 채널톡으로 확답을 받을 것.
