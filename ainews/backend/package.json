@@ -1,0 +1,31 @@
+{
+  "name": "ainews-backend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3020",
+    "build": "next build",
+    "start": "next start -p 3020",
+    "lint": "eslint",
+    "ingest": "tsx scripts/run-ingest.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.71.0",
+    "@prisma/client": "^6.19.3",
+    "next": "16.3.3",
+    "prisma": "^6.19.3",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "rss-parser": "^3.13.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.3",
+    "tsx": "^4.23.12",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,50 @@
+:root {
+  color-scheme: dark;
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  /* devcs와 동일한 다크 전용 컨셉 (main.tsx의 ColorSchemeArea theme="dark"와 짝을 맞춘 값).
+     TDS가 다루지 않는 커스텀 영역(피드 카드, 소스 뱃지 등)에서만 쓰는 토큰. */
+  --ainews-bg: #0a0b10;
+  --ainews-surface: #15161d;
+  --ainews-border: #26272f;
+  --ainews-text: #f2f3f5;
+  --ainews-text-secondary: #9a9ea6;
+  --ainews-text-tertiary: #6f7480;
+  --ainews-primary: #5b96f8;
+  --ainews-domestic: #37d39a;
+  --ainews-domestic-tint: rgba(55, 211, 154, 0.14);
+  --ainews-foreign: #b18cff;
+  --ainews-foreign-tint: rgba(177, 140, 255, 0.14);
+  --ainews-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+}
+
+html {
+  /* iOS WebKit(앱인토스 WebView)은 좁은 뷰포트에서 가독성을 위해 텍스트를 자동으로 확대한다 —
+     데스크톱 브라우저에는 없는 동작이라 로컬에서는 안 보이고, 실기기에서만 카드 텍스트가 커지면서
+     줄바꿈이 늘어나 카드 높이(=카드 간 체감 간격)가 커 보이는 원인이 된다. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* body 배경은 TDS가 주입하는 전역 리셋 CSS에 덮일 수 있어 신뢰할 수 없다(devcs에서 직접 확인함) —
+   #root가 그 사이 최소한의 안전망이고, 각 화면 루트도 스스로 --ainews-bg를 깐다. */
+#root {
+  background: var(--ainews-bg);
+}
+
+body {
+  color: var(--ainews-text);
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+}
