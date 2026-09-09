@@ -1,6 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+// 기본 타임아웃(수십 분 단위)이 너무 길어서, 응답이 없을 때 무한정 멈춘 것처럼 보이는 문제가 있었다.
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY, timeout: 30_000 });
 
 export type Summary = { title: string; summary: string };
 

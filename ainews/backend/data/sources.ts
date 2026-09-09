@@ -1,5 +1,5 @@
 export type SourceKind = "DOMESTIC" | "FOREIGN";
-export type ArticleCategory = "AI" | "DEV" | "DATA";
+export type ArticleCategory = "AI" | "DEV" | "DATA" | "DESIGN" | "MARKETING";
 
 export type SourceConfig = {
   id: string;
@@ -23,4 +23,8 @@ export const SOURCES: SourceConfig[] = [
   { id: "huggingface-blog", name: "Hugging Face", rssUrl: "https://huggingface.co/blog/feed.xml", kind: "FOREIGN", category: "AI" },
   { id: "deepmind-blog", name: "Google DeepMind", rssUrl: "https://deepmind.google/blog/rss.xml", kind: "FOREIGN", category: "AI" },
   { id: "towards-data-science", name: "Towards Data Science", rssUrl: "https://towardsdatascience.com/feed", kind: "FOREIGN", category: "DATA" },
+  { id: "ux-collective", name: "UX Collective", rssUrl: "https://uxdesign.cc/feed", kind: "FOREIGN", category: "DESIGN" },
+  { id: "smashing-magazine", name: "Smashing Magazine", rssUrl: "https://www.smashingmagazine.com/feed/", kind: "FOREIGN", category: "DESIGN" },
+  { id: "hubspot-marketing", name: "HubSpot Marketing Blog", rssUrl: "https://blog.hubspot.com/marketing/rss.xml", kind: "FOREIGN", category: "MARKETING" },
+  { id: "marketing-dive", name: "Marketing Dive", rssUrl: "https://www.marketingdive.com/feeds/news/", kind: "FOREIGN", category: "MARKETING" },
 ];

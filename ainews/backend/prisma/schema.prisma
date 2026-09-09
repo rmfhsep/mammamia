@@ -19,6 +19,16 @@ enum ArticleCategory {
   AI
   DEV
   DATA
+  DESIGN
+  MARKETING
+}
+
+// 배너 광고 그룹 ID 등 프론트 재배포 없이 값만 바꾸고 싶은 설정. 문서 하나만 존재하는 싱글턴이라
+// id를 고정 문자열("banner")로 둬서 upsert 기준으로 쓴다.
+model AdConfig {
+  id              String   @id @map("_id")
+  bannerAdGroupId String
+  updatedAt       DateTime @updatedAt
 }
 
 model Article {

@@ -13,7 +13,13 @@ export type IngestResult = {
 export async function ingestAllSources(): Promise<IngestResult[]> {
   const results: IngestResult[] = [];
   for (const source of SOURCES) {
-    results.push(await ingestSource(source));
+    console.log(`[ingest] ${source.id} 시작...`);
+    const result = await ingestSource(source);
+    console.log(
+      `[ingest] ${source.id} 완료 — fetched:${result.fetched} created:${result.created}` +
+        (result.errors.length ? ` errors:${result.errors.length}` : ""),
+    );
+    results.push(result);
   }
   return results;
 }

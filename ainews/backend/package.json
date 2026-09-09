@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start -p 3020",
     "lint": "eslint",
-    "ingest": "tsx scripts/run-ingest.ts"
+    "ingest": "tsx scripts/run-ingest.ts",
+    "set-banner-ad": "tsx scripts/set-banner-ad.ts",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.0",

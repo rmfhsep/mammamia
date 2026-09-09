@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { apiFetch } from '../api';
 import { queryKeys } from './keys';
 
-export type ArticleCategory = 'AI' | 'DEV' | 'DATA';
+export type ArticleCategory = 'AI' | 'DEV' | 'DATA' | 'DESIGN' | 'MARKETING';
 export type SourceType = 'DOMESTIC' | 'FOREIGN';
 
 export type Article = {

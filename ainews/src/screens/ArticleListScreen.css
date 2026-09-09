@@ -5,13 +5,21 @@
 }
 
 .article-list-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
   padding: 24px 0 8px;
+  background: var(--ainews-bg);
 }
 
 .article-list-greeting {
   margin: 0 0 4px;
   font-size: 14px;
   color: var(--ainews-text-secondary);
+}
+
+.article-list-banner {
+  margin-top: 8px;
 }
 
 .article-list-title {
