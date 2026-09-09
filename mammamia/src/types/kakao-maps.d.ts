@@ -43,6 +43,11 @@ declare global {
           type: string,
           handler: (...args: unknown[]) => void,
         ): void;
+        function removeListener(
+          target: Map | Marker,
+          type: string,
+          handler: (...args: unknown[]) => void,
+        ): void;
       }
     }
   }

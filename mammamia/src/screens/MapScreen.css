@@ -8,3 +8,16 @@
   width: 100%;
   height: 100%;
 }
+
+.map-research-button {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+.map-research-button button {
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
