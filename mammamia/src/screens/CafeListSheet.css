@@ -51,3 +51,7 @@
   gap: 4px;
   align-items: flex-end;
 }
+
+.cafe-sheet-ad {
+  padding: 12px 20px 0;
+}

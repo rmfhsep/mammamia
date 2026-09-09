@@ -67,7 +67,7 @@ export function MapScreen() {
     );
 
     if (cafesQuery.data.length === 0) {
-      openToast('반경 2km 안에 등록된 카페가 아직 없어요');
+      openToast('반경 2km 안에 등록된 수유실이 아직 없어요');
     }
     // openToast는 매 렌더 새 함수일 수 있어 의존성에서 제외합니다 — cafesQuery.data가 바뀔 때만 체크하면 충분해요.
     // eslint-disable-next-line react-hooks/exhaustive-deps

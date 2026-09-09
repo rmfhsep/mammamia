@@ -1,10 +1,13 @@
 import { type PointerEvent, useEffect, useRef, useState } from "react";
 import { Badge, ListRow } from "@toss/tds-mobile";
+import { BannerAd } from "../components/BannerAd";
 import type { Cafe } from "../lib/queries/useCafes";
 import "./CafeListSheet.css";
 
 const EXPANDED_RATIO = 0.68; // 뷰포트 높이의 68%까지 펼쳐짐
 const PEEK_HEIGHT = 250; // 접혔을 때 보이는 높이(px) — 핸들 + 요약 한 줄
+// 앱인토스 콘솔에서 발급받은 실제 ID가 없으면 개발용 테스트 배너로 대체
+const BANNER_AD_GROUP_ID = import.meta.env.VITE_TOSS_BANNER_AD_GROUP_ID ?? "ait-ad-test-banner-id";
 
 type Props = {
   cafes: Cafe[];
@@ -74,7 +77,7 @@ export function CafeListSheet({ cafes, loading, onSelect }: Props) {
       >
         <div className="cafe-sheet-handle-bar" />
         <p className="cafe-sheet-summary">
-          {loading ? "주변 카페를 찾는 중..." : `주변 카페 ${cafes.length}곳`}
+          {loading ? "주변 수유실을 찾는 중..." : `주변 수유실 ${cafes.length}곳`}
         </p>
       </div>
 
@@ -106,6 +109,11 @@ export function CafeListSheet({ cafes, loading, onSelect }: Props) {
             }
           />
         ))}
+        {!loading && cafes.length > 0 && (
+          <li className="cafe-sheet-ad">
+            <BannerAd adGroupId={BANNER_AD_GROUP_ID} />
+          </li>
+        )}
       </ul>
     </div>
   );

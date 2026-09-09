@@ -1,0 +1,220 @@
+.burn-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+.burn-screen__stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.roadview-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.roadview-layer--interactive {
+  pointer-events: auto;
+}
+
+.effect-canvas {
+  position: absolute;
+  inset: 0;
+  touch-action: none;
+}
+
+.burn-screen__hud {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 16px calc(16px + env(safe-area-inset-bottom));
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.75) 70%, transparent 100%);
+}
+
+.burn-screen__top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.burn-screen__back {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  padding: 4px 0;
+}
+
+.burn-screen__address {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.burn-screen__level {
+  font-weight: 700;
+  color: #ff7043;
+}
+
+.burn-screen__reaim {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  white-space: nowrap;
+  padding: 4px 0;
+}
+
+.burn-screen__aim-hint {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+}
+
+.burn-screen__progress-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+}
+
+.burn-screen__progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ffca28, #ff3d00);
+  transition: width 120ms ease-out;
+}
+
+.burn-screen__xp-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: right;
+}
+
+.burn-screen__max-level {
+  margin: 0;
+  font-size: 13px;
+  text-align: center;
+  color: #ffca28;
+}
+
+.burn-screen__weapons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.burn-screen__weapon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 4px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.burn-screen__weapon--active {
+  border-color: #ff7043;
+  background: rgba(255, 112, 67, 0.25);
+}
+
+.burn-screen__weapon--locked {
+  opacity: 0.4;
+}
+
+.burn-screen__weapon-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  font-size: 18px;
+}
+
+.burn-screen__weapon-name {
+  font-size: 11px;
+}
+
+.scouting-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  text-align: center;
+  background: radial-gradient(circle at 50% 40%, #3a1608 0%, #0b0b0f 70%);
+  color: #fff;
+}
+
+.scouting-screen__flame {
+  font-size: 56px;
+  animation: scouting-flame-flicker 900ms ease-in-out infinite;
+}
+
+.scouting-screen__title {
+  margin: 0;
+  font-size: 20px;
+}
+
+.scouting-screen__tip {
+  margin: 0;
+  min-height: 18px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.scouting-screen__bar {
+  width: 100%;
+  max-width: 240px;
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.scouting-screen__bar-fill {
+  height: 100%;
+  background: repeating-linear-gradient(45deg, #ff7043, #ff7043 8px, #ffca28 8px, #ffca28 16px);
+  background-size: 32px 32px;
+  animation: scouting-bar-stripes 700ms linear infinite;
+  transition: width 200ms ease-out;
+}
+
+@keyframes scouting-flame-flicker {
+  0%,
+  100% {
+    transform: scale(1) rotate(-2deg);
+  }
+  50% {
+    transform: scale(1.15) rotate(3deg);
+  }
+}
+
+@keyframes scouting-bar-stripes {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 32px 0;
+  }
+}
